@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>2048 射击：数字合成</title>
+    <script type="module" crossorigin src="./assets/index-CmQmay4f.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-DQU7TQ7i.css">
+  </head>
+  <body>
+    <div id="app" class="app-shell">
+      <header class="top-bar">
+        <div class="brand">
+          <h1>2048 射击</h1>
+          <span class="subtitle">数字合成</span>
+        </div>
+        <div class="top-actions">
+          <div id="coin-display" class="coin-display">
+            <span class="coin-icon">🪙</span>
+            <span id="hud-coins" class="coin-value">0</span>
+          </div>
+          <button id="btn-sound" class="icon-btn" type="button" aria-pressed="true">🔊 音效</button>
+          <button id="btn-tile-swap" class="icon-btn" type="button">🔀 互换</button>
+          <button id="btn-restart" class="icon-btn danger" type="button">↻ 重开</button>
+        </div>
+      </header>
+
+      <section class="stats-row" aria-label="游戏数据">
+        <div class="stat-card">
+          <span class="stat-label">当前得分</span>
+          <strong id="hud-score" class="stat-value">0</strong>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">最高纪录</span>
+          <strong id="hud-best" class="stat-value">0</strong>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">最大数字</span>
+          <strong id="hud-biggest" class="stat-value">—</strong>
+        </div>
+      </section>
+
+      <main class="board-stage">
+        <canvas id="game-canvas" aria-label="5列7行数字射击棋盘"></canvas>
+        <div id="feedback-toast" class="feedback-toast" role="status" aria-live="polite"></div>
+        <button id="btn-skip-tutorial" class="skip-tut-btn" type="button">跳过引导</button>
+      </main>
+
+      <footer class="launcher-bar">
+        <div id="current-slot" class="launcher-slot current-slot">
+          <div id="current-callout" class="current-callout">👆 这里看即将发射</div>
+          <span class="slot-label">即将发射</span>
+          <div id="launcher-current" class="tile-badge current">2</div>
+        </div>
+
+        <div class="swap-wrap">
+          <span id="swap-hint" class="swap-hint">建议交换数字！</span>
+          <button id="btn-swap" class="swap-btn" type="button" title="交换即将发射与下一个数字 (快捷键 S)">
+            ⇄ 交换
+          </button>
+        </div>
+
+        <div class="launcher-slot">
+          <span class="slot-label">下一个</span>
+          <div id="launcher-next" class="tile-badge next">4</div>
+        </div>
+      </footer>
+
+      <p class="controls-hint">按住左右拖动选列，松手发射 · 键盘 1–5 / ←→ + 空格 / S 交换</p>
+    </div>
+
+    <div id="gameover-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="go-title">
+      <div class="modal-card">
+        <h2 id="go-title">游戏结束</h2>
+        <p class="modal-sub">即将发射与下下一个数字均无处可发射。</p>
+        <div class="modal-metrics">
+          <div class="metric-box">
+            <span>本局得分</span>
+            <strong id="go-score">0</strong>
+          </div>
+          <div class="metric-box">
+            <span>历史最高</span>
+            <strong id="go-best">0</strong>
+          </div>
+          <div class="metric-box">
+            <span>最大数字</span>
+            <strong id="go-biggest">0</strong>
+          </div>
+        </div>
+        <p id="go-stats" class="modal-extra">合成次数: 0 · 最高连击: 0x</p>
+        <button id="btn-play-again" class="play-again-btn" type="button">再来一局</button>
+      </div>
+    </div>
+
+    <div id="milestone-modal" class="modal-backdrop" role="dialog" aria-modal="true">
+      <div class="modal-card milestone-card">
+        <button id="btn-close-milestone" class="close-btn" type="button">✕</button>
+        <h2 class="milestone-title">新的阶段解锁了！</h2>
+        <div class="milestone-tiles">
+          <div id="milestone-prev" class="milestone-tile side"></div>
+          <div id="milestone-current" class="milestone-tile center"></div>
+          <div id="milestone-next" class="milestone-tile side"></div>
+        </div>
+        <div class="milestone-reward">
+          <span class="coin-icon-large">🪙</span>
+          <span id="milestone-reward-amount" class="reward-amount">+50</span>
+        </div>
+        <button id="btn-claim-milestone" class="claim-btn" type="button">领取</button>
+      </div>
+    </div>
+
+  </body>
+</html>
